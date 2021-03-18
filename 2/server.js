@@ -14,12 +14,18 @@ connection.connect(); // 로그인하는거임 하이디sql
 
 var server = http.createServer(app).listen(80);
 
-app.get('/testdb', function(req, res) {
-  connection.query(`SELECT NO, studentNo, NAME FROM student WHERE NO >= 12`, function(error, results, fields) {
+
+app.get('/ajaxPracticeForm', function (req, res) {
+  res.sendfile("src/ajaxPractice.html")
+});
+
+app.get('/studentInfoPractice', function(req, res) {
+  // console.log(req.query.no, req.query.no2, req.query.no3)
+  // http://localhost/studentInfoPractice?no=2&no2=5&no3=10
+  connection.query(`SELECT NO, studentNo, NAME
+    FROM student where no=${req.query.no}`,
+    function(error, results, fields) {
     if (error) throw error;
-    console.log(results);
-    setTimeout(function(){
         res.send(results)
-    }, 5000);               // 5초후 실행됨
   });
 });

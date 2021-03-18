@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<body>
+  id: <input type="text" id="loginId" name="" value=""><br>
+  password: <input type="text" id="password" name="" value=""><br>
+  <input type="button" value="버튼1" id="button1">
+  <input type="button" value="버튼2" id="button2">
+  <input type="button" value="버튼3" id="button3">
+  <input type="button" value="버튼4" id="button4"><br><br>
+
+  no : <input type="text" name="" value="" id="no">
+  <input type="button" name="" value="버튼1" id="button5"> <br>
+
+  <span id="resultArea"> </span>
+
+  <script>
+    console.log("클릭")
+    document.getElementById('button1').addEventListener("click", function() {
+      // alert('버튼1');
+      console.log(document.getElementById('button1')); // document는 보고있는 문서 자체.
+      console.log(document.getElementById('loginId').value);
+      console.log(document.getElementById('password').value);
+    });
+
+    $("#button2").click(function() {
+      console.log($("#loginId").val(), $("#password").val());
+      $("#loginId").val(""); // 버튼 누르면 text란 다시 클리어됨
+      $("#password").val("");
+    });
+
+    $("#button3").click(function() {
+      $.ajax({
+        type: "GET",
+        url: "/studentInfoPractice",
+        data: {
+        },
+        success: function(res) {
+          console.log(res);
+          // res.send(res);   브라우저에서는 req가 없다. res만 있을
+        },
+        error: function(res) {
+        }
+      });
+    });
+
+    $("#button5").click(function() {
+      $.ajax({
+        type: "GET",
+        url: `/studentInfoPractice?no=${$("#no").val()}`,
+        // url: "/studentInfoPractice?no="+$("#no").val(),
+        data: {
+        },
+        success: function(res) {
+          $("#resultArea").append(`${res[0].NO} / ${res[0].studentNo} / ${res[0].NAME}<br>`);
+        }
+      });
+    });
+
+
+
+    app.get('/order', function(req, res) {
+      // 주문을 읽어오는 로직
+    })
+    app.put('/order', function(req, res) {
+      // 주문을 수정하는 로직
+    })
+    app.post('/order', function(req, res) {
+      // 주문을 생성하는 로직
+    })
+    app.delete('/order', function(req, res) {
+      // 주문을 삭제하는 로직
+    })
+
+  </script>
+</body>
+
+</html>
