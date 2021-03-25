@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <body>
+    제목: <input type="text" id="title"> <br>
+    내용: <input type="text" id="content"><br><br>
+    <input type="button" id="input" value="입력!">
+
+    <script type="text/javascript">
+
+      $("#input").click(function() {
+        console.log($("#title").val(), $("#content").val(),);
+        $.ajax({
+          type: "POST",
+          url: "/test1_input",
+          data: {
+            title: $('#title').val(),
+            content: $('#content').val(),
+          },
+          success: function(res) {
+              console.log(res); // 브라우저 콘솔에 띄우겠다.
+          }                     // 이걸 적어야 서버의 res.send()가 작동함
+        });
+      });
+
+    </script>
+  </body>
+</html>
