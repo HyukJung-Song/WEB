@@ -1,3 +1,4 @@
+
 var express = require('express');
 var http = require('http');
 var app = express();
@@ -10,17 +11,16 @@ var connection = mysql.createConnection({
   database: 'test'
 });
 connection.connect(); // 로그인하는거임 하이디sql
-var server = http.createServer(app).listen(80);
+var server = http.createServer(app).listen(81);
 
-app.get('/ajaxPracticeForm', function (req, res) {
-  res.sendfile("src/ajaxPractice.html")
+app.get('/test1', function (req, res) {
   console.log(req)
+  res.sendfile("src/test1.html")
 });
 
-app.get('/studentInfoPractice', function(req, res) {
+app.get('/test1_db', function(req, res) {
   // console.log(req.query.no, req.query.no2, req.query.no3)
-  // http://localhost/studentInfoPractice?no=2&no2=5&no3=10
-  connection.query(`SELECT NO, studentNo, NAME
+  connection.query(`SELECT no, studentno, name, age
     FROM student where no=${req.query.no}`,  // ``안에 ${}있으면 {}는 변수로 인식
     function(error, results, fields) {
     if (error) throw error;

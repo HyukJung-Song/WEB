@@ -54,9 +54,11 @@
     $("#button5").click(function() {
       $.ajax({
         type: "GET",
-        url: `/studentInfoPractice?no=${$("#no").val()}`,
+        url: `/studentInfoPractice`,
         // url: "/studentInfoPractice?no="+$("#no").val(),
         data: {
+          no: $("#no").val()
+          // no2: $("#no").val()
         },
         success: function(res) {
           $("#resultArea").append(`${res[0].NO} / ${res[0].studentNo} / ${res[0].NAME}<br>`);
@@ -67,7 +69,7 @@
 
 
     app.get('/order', function(req, res) {
-      // 주문을 읽어오는 로직
+      // 주문을 읽어오는 로직3
     })
     app.put('/order', function(req, res) {
       // 주문을 수정하는 로직
