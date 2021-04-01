@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 connection.connect(); // 로그인하는거임 하이디sql
 var server = http.createServer(app).listen(80);
 
-app.get('/test', function (req, res) {
+app.get('/test', function (req, res) {    // 1
   res.sendfile("src/test.html")
 });
 
@@ -22,15 +22,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/student', function(req, res) {
-  connection.query(
+  connection.query(      // 5 (받은 req로 db에 쿼리문 실행)
     `INSERT INTO student
     (studentNo, NAME, age)
     VALUES
     ('${req.body.studentNo}', '${req.body.NAME}', ${req.body.age})`,
-    function(error, results, fields) {
-        res.send(results)
+    function(error, results, fields) { // 6 (db실행되면 res 옴)
+      if(error) {
+        res.send("not ok")
+      } else if(results.affectedRows==1) {
+        res.send("ok")
+      }
+        // res.send(results)
   });
 });
+
+// test1.html에서 input버튼을 누르면 ajax가 data를 담고 req를 한다.
+// 이 req를 실행해서 db에 아래 쿼리를 실행하면 아래 fuction 내부가 작동하고
+// (만일 db가 먹통이면 내부가 작동을 안한다.)
+// 그 res를 $("#input").click(function()의 success: function의 res로
+// 응답을 보내고 그 응답이 브라우저콘솔에 찍히게 되는 구조임.
 
 app.post('/studentMod', function(req, res) {
   connection.query(
