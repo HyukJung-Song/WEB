@@ -13,6 +13,10 @@ connection.connect(); // 로그인하는거임 하이디sql
 var server = http.createServer(app).listen(80);
 
 
-app.get('/if', function (req, res) {
-  res.sendfile("src/if.html")
+app.get('/test', function (req, res) {
+  res.sendfile("src/test.html")
+});
+
+app.get('/test1', function (req, res) {
+  res.sendfile("src/test1.html")
 });

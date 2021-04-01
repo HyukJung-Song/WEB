@@ -17,13 +17,3 @@ app.get('/test1', function (req, res) {
   console.log(req)
   res.sendfile("src/test1.html")
 });
-
-app.get('/test1_db', function(req, res) {
-  // console.log(req.query.no, req.query.no2, req.query.no3)
-  connection.query(`SELECT no, studentno, name, age
-    FROM student where no=${req.query.no}`,  // ``안에 ${}있으면 {}는 변수로 인식
-    function(error, results, fields) {
-    if (error) throw error;
-        res.send(results)
-  });
-});
