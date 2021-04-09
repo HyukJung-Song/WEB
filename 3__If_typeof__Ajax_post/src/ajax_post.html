@@ -16,7 +16,7 @@
     <script>
 
     $("#postStdInfoBtn").click(function() {
-      console.log($("#stdNo").val(), $("#stdName").val(), $("#stdAge").val());
+      // console.log($("#stdNo").val(), $("#stdName").val(), $("#stdAge").val());
       $.ajax({                          // 4
         type: "POST",
         url: "/student",
@@ -26,7 +26,7 @@
           age: $('#stdAge').val()
         },
         success: function(res) {  // 7. (res가 "ok" or "not ok"로 옴)
-          console.log(res);
+          // console.log(res);
           if (res=='not ok') {
             alert("입력 실패")
           } else if (res=='ok') {

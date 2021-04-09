@@ -12,9 +12,15 @@ var connection = mysql.createConnection({
 connection.connect(); // 로그인하는거임 하이디sql
 var server = http.createServer(app).listen(80);
 
-app.get('/test', function (req, res) {    // 1
-  res.sendfile("src/test.html")
+app.get('/if_typeof', function (req, res) {    // 1
+  res.sendfile("src/if_typeof.html")
 });
+
+app.get('/ajax_post', function (req, res) {    // 1
+  res.sendfile("src/ajax_post.html")
+});
+
+
 
 // POST로 할때는 아래 3줄 추가해야함. 그리고 req.body.~ 로 써야함.
 var bodyParser = require('body-parser');
