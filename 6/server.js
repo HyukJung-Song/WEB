@@ -1,7 +1,7 @@
-
 var express = require('express');
 var http = require('http');
 var app = express();
+var server = http.createServer(app).listen(80);
 
 let mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -11,9 +11,8 @@ var connection = mysql.createConnection({
   database: 'test'
 });
 connection.connect(); // 로그인하는거임 하이디sql
-var server = http.createServer(app).listen(80);
 
-app.get('/test1', function (req, res) {
-  console.log(req)
-  res.sendfile("src/test1.html")
+
+app.get('/arr', function (req, res) {
+  res.sendfile("src/arr.html")
 });

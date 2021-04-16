@@ -1,10 +1,15 @@
 
+// db말고 서버로 웹페이지만 띄우기(get)위한 아주 기초세팅.
 var express = require('express');
 var http = require('http');
 var app = express();
+var server = http.createServer(app).listen(80);
+// 서버 가능 포트번호 81 ~ 86
+// localhost:81/test 등으로 접속
 
+
+// db 접속해서 필요한 정보 get하기 위한 기초세팅
 let mysql = require('mysql');
-
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -13,9 +18,8 @@ var connection = mysql.createConnection({
   });
   connection.connect(); // 로그인하는거임 하이디sql
 
-let a = 0;
-var server = http.createServer(app).listen(80);
 
+let a = 0;
 app.get('/', function (req, res) {
   res.send("here is main@@@@@@@@@")
 });
