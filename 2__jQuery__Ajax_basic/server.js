@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
   password: '1234',
   database: 'test'
 });
-connection.connect(); // 로그인하는거임 하이디sql
+connection.connect(); // 하이디sql에 연결함
 var server = http.createServer(app).listen(80);
 
 

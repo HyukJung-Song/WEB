@@ -15,8 +15,8 @@ var connection = mysql.createConnection({
   user     : 'root',
   password : '1234',
   database : 'test'
-  });
-  connection.connect(); // 로그인하는거임 하이디sql
+});
+connection.connect(); // 로그인하는거임 하이디sql
 
 
 let a = 0;
