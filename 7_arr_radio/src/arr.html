@@ -27,9 +27,10 @@
 
     for (let i=0; i<$("#x").val(); i++) {
       for (let j=0; j<$("#y").val(); j++) {
-        $("#resultArea").append(`${arr[i][j]} `);
+        $("#resultArea").append(arr[i][j] + ' ');
+        // $("#resultArea").append(`${arr[i][j]} `);
       }
-      $("#resultArea").append(`<br>`)
+      $("#resultArea").append('<br>')
     }
 
     // 실습1

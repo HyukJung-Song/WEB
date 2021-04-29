@@ -2,13 +2,22 @@ var express = require('express');
 var http = require('http');
 var app = express();
 
-let mysql = require('mysql');
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1234',
-  database: 'test'
+// let oracle = require('oracle');
+// var connection = oracle.createConnection({
+//   host: 'localhost',
+//   user: 'SYSTEM',
+//   password: 'manager',
+//   database: 'LOCAL_ORACLE'
+// });
+
+  let mysql = require('mysql');
+  var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'test'
 });
+
 connection.connect(); // 로그인하는거임 하이디sql
 var server = http.createServer(app).listen(80);
 
