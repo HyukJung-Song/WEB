@@ -6,21 +6,42 @@
   </head>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <body>
+    (서버에서 작동) <br>
     가격:  <input type="text" name="" value="" id="price">
-    <input type="button" name="" value="확인" id="check">
+    <input type="button" name="" value="확인" id="check"> <br>
+    ======= <br>
+    (DB에서 가져옴) <br>
+    상품명:  <input type="text" name="" value="" id="name">
+    <input type="button" name="" value="가격조회" id="priceCheck">
+
+
   </body>
   <script type="text/javascript">
 
     $("#check").click(function() {
       $.ajax({
         type: "GET",
-        url: "/priceCheck",
+        url: "/itemCheck",
         data: {
-          price : Number($('#price').val())
+          price : $('#price').val()   // Number로 안바꿔도 된다.
         },
         success: function(res) {
           // console.log(res)
           alert(res)
+        }
+      });
+    });
+
+    $("#priceCheck").click(function() {
+      $.ajax({
+        type: "GET",
+        url: "/priceCheck",
+        data: {
+          name : $('#name').val()
+        },
+        success: function(res) {
+          // console.log(res[0])
+          alert(res[0].itemPrice)
         }
       });
     });
