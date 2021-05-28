@@ -123,7 +123,6 @@ app.post('/insert', function(req, res) {
   });
 });
 
-
 app.get('/priceCheck', function(req, res) {
   connection.query(`SELECT itemPrice
     FROM item where itemName="${req.query.name}"`,  // ``안에 ${}있으면 {}는 변수로 인식
@@ -147,5 +146,17 @@ app.get('/getItems', function(req, res) {
         }
       }
       res.send(itemName)
+  });
+});
+
+app.post('/deleteItem', function(req, res) {
+  connection.query(`DELETE FROM item WHERE no = ${req.body.no}`,
+    function(error, results, fgields) {
+      if(error) {
+        console.log(error)
+        res.send("x")
+      } else if(results.affectedRows==1) {
+        res.send("o")
+      }
   });
 });

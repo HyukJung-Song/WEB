@@ -30,16 +30,31 @@
         console.log(res[0])
         // $("#resultArea").append(res[0]);  객체라 이거는 콘솔창에서만 확인이 된다
         for (i in res) {
-          $("#resultArea").append(`${res[i].idx} / ${res[i].itemName} / ${res[i].itemPrice}
-            <input type="button" value="삭제" id="delete" onclick="deletefunc(${res[i].idx})"> <br>`);
+          $("#resultArea").append(`${res[i].no} / ${res[i].itemName} / ${res[i].itemPrice}
+            <input type="button" value="삭제" id="delete" onclick="deletefunc(${res[i].no})"> <br>`);
         }
       }
     });
 
     function deletefunc(p) {
       if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-        document.form.submit();
-      }else{   //취소
+        // document.form.submit();
+        $.ajax({
+          type: "POST",
+          url: "/deleteItem",
+          data: {
+            no : p
+          },
+          success: function(res) {
+            if (res=='o') {
+              alert("삭제되었습니다.")
+              location.href = "/listForm"
+            } else if (res=='x') {
+              alert(`삭제 실 `)
+            }
+          }
+        });
+      } else{   //취소
         return;
       }
     }
