@@ -40,6 +40,22 @@ app.get('/itemCheck', function(req, res) {
   res.send(itemName)
 });
 
+app.get('/listForm', function(req, res) {
+    res.sendfile("src/listForm.html")
+});
+
+app.get('/showList', function(req, res) {
+  connection.query(`SELECT * FROM item`,
+  function(error, results, fields) {
+    console.log(results[0])
+    console.log(results[0].idx)
+    console.log(results[0].itemName)
+    console.log(results[0].itemPrice)
+    console.log(results)
+    res.send(results)
+  });
+});
+
 app.get('/insertForm', function(req, res) {
   res.sendfile("src/insertForm.html")
 });
@@ -122,7 +138,6 @@ app.get('/getItems', function(req, res) {
     function(error, results, fields) {
 
       let priceTable = results;
-
       let itemName = "구매불가";
       const price = req.query.price;
 
