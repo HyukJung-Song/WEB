@@ -48,7 +48,7 @@ app.get('/showList', function(req, res) {
   connection.query(`SELECT * FROM item`,
   function(error, results, fields) {
     console.log(results[0])
-    console.log(results[0].idx)
+    console.log(results[0].no)
     console.log(results[0].itemName)
     console.log(results[0].itemPrice)
     console.log(results)
@@ -149,7 +149,52 @@ app.get('/getItems', function(req, res) {
   });
 });
 
-app.post('/deleteItem', function(req, res) {
+app.get('/updateForm', function(req, res) {
+  res.sendfile("src/updateForm.html")
+});
+
+app.get('/getOneItem', function(req, res) {
+  connection.query(`SELECT * FROM item WHERE no=${req.query.no}`,
+    function(error, results, fields) {
+      res.send(results)
+  });
+});
+
+app.put('/update', function(req, res) {
+  connection.query(`SELECT * FROM item
+    WHERE (itemName = '${req.body.name}' or itemPrice = ${req.body.price})
+      AND no != ${req.body.no}`,
+    function(error, results, fields) {
+      if (results.length==2) {
+        res.send("동일한 이름, 가격이 각각 존재합니다(2개)")
+      } else if (results.length==1) {
+        if (results[0].itemName == req.body.name && results[0].itemPrice == req.body.price) {
+          res.send("동일한 이름, 가격을 가진 상품이 존재합니다.")
+        } else if (results[0].itemName == req.body.name) {
+          res.send("동일한 이름을 가진 상품이 존재합니다.")
+        } else {
+          res.send("동일한 가격을 가진 상품이 존재합니다.")
+        }
+      } else {
+        connection.query(
+          `UPDATE item
+           SET itemName = '${req.body.name}'
+            , itemPrice = ${req.body.price}
+           WHERE no = ${req.body.no}`,    // , 꼭 적어야됨!!!!!
+            function(error, results, fields) {
+              if(error) {
+                console.log(error)
+                res.send("x")
+              } else if(results.affectedRows==1) {
+                console.log(results)
+                res.send("o")
+              }
+            })
+        }
+  });
+});
+
+app.delete('/deleteItem', function(req, res) {
   connection.query(`DELETE FROM item WHERE no = ${req.body.no}`,
     function(error, results, fgields) {
       if(error) {
