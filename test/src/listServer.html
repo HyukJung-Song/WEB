@@ -6,20 +6,11 @@
   </head>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <body>
-
-
-
-
-
-
+    <input type="button" id="goToMain" value="홈으로">
   </body>
   <script type="text/javascript">
-    $('#gugu').click(function() {
-      alert(`${$('#dan').val()}`);   // = alert($('#dan').val());
-
-      $('#resultArea').html("clear~~~");
-      let dan = Number($('#dan').val());
-      let num = Number($('#num').val());
-    });
+    $("#goToMain").click(function(){
+      location.href = "/test";
+    })
   </script>
 </html>
