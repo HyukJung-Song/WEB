@@ -12,14 +12,26 @@
     <input type="button" id="gugu" value="구구단출력"> <br><br><br>
 
     2) item (from server) <br>
-    <input type="button" id="goToListServer" value="목록 조회">
+    <input type="button" id="showList_Server" value="목록조회"> <br><br><br>
 
-    <br><br><br>
+    3) item (from DB) <br>
+    <input type="button" id="goToInsertForm" value="상품입력"> <br><br><br>
+
+
     <span id="res"></span>
   </body>
 
   <script type="text/javascript">
 
+  // 3)
+  $('#goToInsertForm').click(function() {
+    location.href = "/insertForm"
+  })
+
+
+
+
+    // 1)
     $('#gugu').click(function() {
       let dan = $('#dan').val();
       let hang = $('#hang').val();
@@ -31,9 +43,20 @@
       }
     });
 
-    $('#goToListServer').click(function() {
-      location.href = "/listServer"    // 이게 주소창에 localhost/listServer 치는거임.
+    // 2)
+    $('#showList_Server').click(function() {
+      $.ajax({
+        type: "GET",
+        url: "/getList_Server",
+        success: function(res) {
+          $('#res').html("");
+          for (let i=0; i<res.length; i++) {
+            $('#res').append(`${res[i].idx} / ${res[i].name} / ${res[i].price}<br>`);
+          }
+        }
+      })
     })
+
 
   </script>
 </html>
