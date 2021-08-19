@@ -21,7 +21,7 @@ connection.connect(); // 로그인하는거임 하이디sql
 
 let a = 0;
 app.get('/', function (req, res) {
-  res.send("here is main@@@@@@@@@")
+  res.send("here is main~~")
 });
 app.get('/testHtml', function (req, res) {
   console.log("app.js에서 실행됨(서버쪽 console에 적힘)")
